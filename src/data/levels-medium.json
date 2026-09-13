@@ -1,0 +1,43 @@
+{
+  "difficulty": "medium",
+  "boss": {
+    "name": "Logic Wraith",
+    "description": "Призрак, искажающий логику кода",
+    "tasks": [
+      {
+        "id": "medium-1",
+        "type": "logic",
+        "code": "function checkAge(age) {\n  if (age >= 18 {\n    return \"Доступ разрешён\";\n  }\n  return \"Доступ запрещён\";\n}",
+        "errorLine": 2,
+        "correctAnswer": "  if (age >= 18) {",
+        "hint": "Проверь синтаксис условного оператора",
+        "explanation": "В JavaScript условие в `if` обязательно заключается в круглые скобки."
+      },
+      {
+        "id": "medium-2",
+        "type": "logic",
+        "code": "function sum(a, b) {\n  let result = a + b;\n}\n\nconsole.log(sum(2, 3)); // undefined",
+        "errorLine": 3,
+        "correctAnswer": "  return result;",
+        "hint": "Функция должна возвращать результат",
+        "explanation": "Без `return` функция возвращает `undefined`. Нужно вернуть `result`."
+      }
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "hp": 150,
+        "phaseThreshold": 70,
+        "sprite": "boss-medium-1.png",
+        "damageToBoss": 25,
+        "damageToPlayer": 15
+      },
+      {
+        "phase": 2,
+        "sprite": "boss-medium-2.png",
+        "damageToBoss": 20,
+        "damageToPlayer": 25
+      }
+    ]
+  }
+}

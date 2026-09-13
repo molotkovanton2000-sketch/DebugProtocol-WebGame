@@ -1,0 +1,51 @@
+{
+  "difficulty": "hard",
+  "boss": {
+    "name": "Null Pointer",
+    "description": "Демон пустоты, ломающий архитектуру кода",
+    "tasks": [
+      {
+        "id": "hard-1",
+        "type": "write",
+        "code": "// Напиши функцию factorial(n), которая возвращает факториал числа n\n// Пример: factorial(5) === 120\n\n",
+        "correctAnswer": "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}",
+        "tests": [
+          { "input": [5], "expected": 120 },
+          { "input": [0], "expected": 1 },
+          { "input": [3], "expected": 6 }
+        ],
+        "hint": "Используй рекурсию: factorial(n) = n * factorial(n-1)",
+        "explanation": "Факториал — классический пример рекурсии. Базовый случай: n <= 1 → 1."
+      },
+      {
+        "id": "hard-2",
+        "type": "write",
+        "code": "// Напиши функцию isPalindrome(str), которая возвращает true,\n// если строка читается одинаково в обоих направлениях\n// Пример: isPalindrome(\"racecar\") === true\n\n",
+        "correctAnswer": "function isPalindrome(str) {\n  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return clean === clean.split('').reverse().join('');\n}",
+        "tests": [
+          { "input": ["racecar"], "expected": true },
+          { "input": ["hello"], "expected": false },
+          { "input": ["A man, a plan, a canal: Panama"], "expected": true }
+        ],
+        "hint": "Приведи строку к нижнему регистру и сравни с перевёрнутой версией",
+        "explanation": "Палиндром — строка, которая читается одинаково в обоих направлениях. Можно сравнивать с `reverse()`."
+      }
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "hp": 200,
+        "phaseThreshold": 100,
+        "sprite": "boss-hard-1.png",
+        "damageToBoss": 25,
+        "damageToPlayer": 20
+      },
+      {
+        "phase": 2,
+        "sprite": "boss-hard-2.png",
+        "damageToBoss": 20,
+        "damageToPlayer": 25
+      }
+    ]
+  }
+}

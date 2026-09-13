@@ -1,0 +1,43 @@
+{
+  "difficulty": "easy",
+  "boss": {
+    "name": "Syntax Worm",
+    "description": "Вирус, пожирающий точки с запятой",
+    "tasks": [
+      {
+        "id": "easy-1",
+        "type": "syntax",
+        "code": "let x = 5\nconsole.log(x);",
+        "errorLine": 1,
+        "correctAnswer": "let x = 5;",
+        "hint": "Посмотри на конец первой строки",
+        "explanation": "В JavaScript точка с запятой завершает инструкцию. Без неё интерпретатор может неправильно понять код."
+      },
+      {
+        "id": "easy-2",
+        "type": "syntax",
+        "code": "let userName = \"Alice\";\nconsole.log(usernme);",
+        "errorLine": 2,
+        "correctAnswer": "console.log(userName);",
+        "hint": "Проверь, совпадает ли имя переменной в объявлении и в выводе",
+        "explanation": "Имена переменных чувствительны к регистру. `userName` и `usernme` — разные переменные."
+      }
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "hp": 100,
+        "phaseThreshold": 50,
+        "sprite": "boss-easy-1.png",
+        "damageToBoss": 20,
+        "damageToPlayer": 10
+      },
+      {
+        "phase": 2,
+        "sprite": "boss-easy-2.png",
+        "damageToBoss": 15,
+        "damageToPlayer": 20
+      }
+    ]
+  }
+}
