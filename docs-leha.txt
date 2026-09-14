@@ -1,0 +1,117 @@
+# Задание для Лёши (коротко)
+
+**Что делать:** заполнить 4 JSON-файла в `src/data/` заданиями и репликами боссов.
+
+**Ветка:** `feature/leha-layout`
+
+---
+
+## Файлы и что в них
+
+| Файл | Что добавить | Сколько |
+|------|-------------|---------|
+| `levels-easy.json` | Задания в `tasks` | 12 (уже есть 2) |
+| `levels-medium.json` | Задания в `tasks` | 14 (уже есть 2) |
+| `levels-hard.json` | Задания в `tasks` | 18 (уже есть 2) |
+| `bosses.json` | Реплики в `dialogue` | Все события |
+
+---
+
+## Правила JSON
+
+| В коде | В JSON |
+|--------|--------|
+| Перенос строки | `\n` |
+| Кавычка `"` | `\"` |
+| Обратный слэш `\` | `\\` |
+
+**Пример:** код
+```javascript
+let x = "hello";
+console.log(x);
+```
+в JSON:
+```json
+"code": "let x = \"hello\";\nconsole.log(x);"
+```
+
+---
+
+## Структура задания
+
+```json
+{
+  "id": "easy-3",
+  "type": "syntax",
+  "code": "код с ошибкой",
+  "errorLine": 1,
+  "correctAnswer": "исправленная строка",
+  "hint": "подсказка",
+  "explanation": "объяснение"
+}
+```
+
+| Поле | Обязательно | Что |
+|------|-------------|-----|
+| `id` | ✅ | `easy-3`, `medium-4`, `hard-5` |
+| `type` | ✅ | `syntax` / `logic` / `write` |
+| `code` | ✅ | Код с ошибкой |
+| `correctAnswer` | ✅ | Эталонный ответ |
+| `tests` | ❌ | Только для `write`: `[{"input": [5], "expected": 120}]` |
+| `hint` | ✅ | Подсказка |
+| `explanation` | ✅ | Объяснение |
+
+---
+
+## Типы заданий
+
+- **Лёгкий** (`syntax`) — исправить синтаксис
+- **Средний** (`logic`) — исправить логику
+- **Сложный** (`write`) — написать код с нуля (обязательно `tests`)
+
+---
+
+## Реплики боссов (`bosses.json`)
+
+```json
+"dialogue": {
+  "start": ["реплика 1", "реплика 2"],
+  "onDamage": ["..."],
+  "onPhaseChange": ["..."],
+  "onDefeat": ["..."]
+}
+```
+
+- `start` — начало фазы
+- `onDamage` — после правильного ответа
+- `onPhaseChange` — переход во 2 фазу
+- `onDefeat` — победа
+
+
+## Проверка
+
+1. VS Code подсветит ошибки JSON
+2. Или [jsonlint.com](https://jsonlint.com/)
+3. Нет лишних запятых после последнего элемента
+4. Все кавычки закрыты
+
+---
+
+## Git
+
+```bash
+git checkout main
+git pull origin main
+git checkout feature/leha-layout
+git merge main
+# работа
+git add src/data/
+git commit -m "Что ты сделал"
+git push origin feature/leha-layout
+```
+
+Потом PR: `base: dev` ← `compare: feature/leha-layout`. В ревьюеры — тимлида.
+
+---
+
+**Если что-то непонятно — спроси тимлида.
