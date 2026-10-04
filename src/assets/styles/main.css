@@ -1,0 +1,142 @@
+@import './reset.css';
+@import './variables.css';
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-pixel);
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Сцена 16:9. Все экраны рисуются внутри неё, а размеры считаются в cqw,
+   поэтому картинка масштабируется 1-в-1 с макетом на любом мониторе.
+   -------------------------------------------------------------------------- */
+.stage {
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-bg);
+}
+
+.stage__screen {
+  position: relative;
+  width: min(100vw, calc(100dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  container-type: size;
+  background: var(--color-bg);
+}
+
+@media (orientation: portrait) {
+  .stage__screen {
+    width: 100vw;
+    height: 100dvh;
+    aspect-ratio: auto;
+  }
+}
+
+/* Пиксель-арт без размытия */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* Скрытый текст для скринридеров */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Общие анимации
+   -------------------------------------------------------------------------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(var(--px) * -14)); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(calc(var(--px) * 6)) scale(1.006); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 1; }
+  47% { opacity: 0.25; }
+  49% { opacity: 0.9; }
+  51% { opacity: 0.35; }
+  55% { opacity: 1; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  25% { transform: translate(calc(var(--px) * -3), calc(var(--px) * 2)); }
+  50% { transform: translate(calc(var(--px) * 3), calc(var(--px) * -2)); }
+  75% { transform: translate(calc(var(--px) * -2), 0); }
+  100% { transform: translate(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(calc(var(--px) * -14)); }
+  40% { transform: translateX(calc(var(--px) * 12)); }
+  60% { transform: translateX(calc(var(--px) * -8)); }
+  80% { transform: translateX(calc(var(--px) * 5)); }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Переходы между страницами (RouterView + Transition) */
+.screen-fade-enter-active,
+.screen-fade-leave-active {
+  transition: opacity 180ms steps(4, end);
+}
+
+.screen-fade-enter-from,
+.screen-fade-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

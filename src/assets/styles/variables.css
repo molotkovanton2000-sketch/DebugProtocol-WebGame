@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Debug Protocol — дизайн-токены
+   Макеты нарисованы под 1920×1080, поэтому все размеры считаются
+   в «пикселях макета»: calc(var(--px) * N) масштабируется вместе со сценой.
+   ========================================================================== */
+
+:root {
+  /* Цвета */
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: #8a8a9a;
+  --color-violet: #7b3c96;          /* молнии, обводка босса */
+  --color-violet-light: #b06fd0;
+  --color-neon: #a100ff;            /* рамки панелей в игре */
+  --color-neon-glow: rgba(161, 0, 255, 0.55);
+  --color-shadow: #161f27;          /* тело босса */
+  --color-star: #dcdcdc;
+  --color-star-off: #3a3a44;
+  --color-success: #3cff8f;
+  --color-danger: #ff3c6e;
+  --color-hp-boss: #a100ff;
+  --color-hp-player: #ececf1;
+
+  /* Шрифт */
+  --font-pixel: 'Press Start 2P', 'Courier New', monospace;
+
+  /* Пиксель макета (1920 px по ширине сцены) */
+  --design-width: 1920;
+  --px: calc(100cqw / var(--design-width));
+
+  /* Рамки и скругления */
+  --border-panel: calc(var(--px) * 8);
+  --radius-panel: calc(var(--px) * 22);
+
+  /* Анимации */
+  --ease-glitch: steps(2, end);
+  --transition-fast: 120ms;
+}
+
+/* Портретная раскладка (телефоны): макет «перестраивается» под ширину 1080 */
+@media (orientation: portrait) {
+  :root {
+    --design-width: 1080;
+  }
+}
