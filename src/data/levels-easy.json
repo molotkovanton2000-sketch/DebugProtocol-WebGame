@@ -7,20 +7,122 @@
       {
         "id": "easy-1",
         "type": "syntax",
+        "description": "Инструкция оборвалась на полуслове. Заверши её по всем правилам синтаксиса.",
         "code": "let x = 5\nconsole.log(x);",
         "errorLine": 1,
         "correctAnswer": "let x = 5;",
-        "hint": "Посмотри на конец первой строки",
+        "hint": "Посмотри на конец первой строки.",
         "explanation": "В JavaScript точка с запятой завершает инструкцию. Без неё интерпретатор может неправильно понять код."
       },
       {
         "id": "easy-2",
         "type": "syntax",
+        "description": "Вирус исказил имя переменной, и консоль не может её узнать.",
         "code": "let userName = \"Alice\";\nconsole.log(usernme);",
         "errorLine": 2,
         "correctAnswer": "console.log(userName);",
-        "hint": "Проверь, совпадает ли имя переменной в объявлении и в выводе",
+        "hint": "Проверь, совпадает ли имя переменной в объявлении и в выводе.",
         "explanation": "Имена переменных чувствительны к регистру. `userName` и `usernme` — разные переменные."
+      },
+      {
+        "id": "easy-3",
+        "type": "syntax",
+        "description": "Строковый литерал сбежал из кавычек и сломал выражение.",
+        "code": "let message = \"Hello;\nconsole.log(message);",
+        "errorLine": 1,
+        "correctAnswer": "let message = \"Hello\";",
+        "hint": "Строка должна быть закрыта кавычкой.",
+        "explanation": "Строковые литералы требуют открывающей и закрывающей кавычки одного типа."
+      },
+      {
+        "id": "easy-4",
+        "type": "syntax",
+        "description": "Условие `if` вырвалось наружу, потому что его забыли оградить.",
+        "code": "let isReady = true;\nif (isReady {\n  console.log(\"Go!\");\n}",
+        "errorLine": 2,
+        "correctAnswer": "if (isReady) {",
+        "hint": "Проверь закрывающие скобки в условии if.",
+        "explanation": "Условие в операторе if должно полностью оборачиваться в круглые скобки."
+      },
+      {
+        "id": "easy-5",
+        "type": "syntax",
+        "description": "Блок кода функции остался открытым. Защити его закрывающим символом.",
+        "code": "function sayHello() {\n  return \"Hello World!\";",
+        "errorLine": 2,
+        "correctAnswer": "  return \"Hello World!\";\n}",
+        "hint": "У функции отсутствует закрывающая фигурная скобка }.",
+        "explanation": "Тело функции обязательно должно закрываться фигурной скобкой."
+      },
+      {
+        "id": "easy-6",
+        "type": "syntax",
+        "description": "Массив рассыпался из-за того, что его забыли закрыть.",
+        "code": "let colors = [\"red\", \"green\", \"blue\";\nconsole.log(colors);",
+        "errorLine": 1,
+        "correctAnswer": "let colors = [\"red\", \"green\", \"blue\"];",
+        "hint": "Массив должен закрываться квадратной скобкой.",
+        "explanation": "Элементы массива объявляются в квадратных скобках []."
+      },
+      {
+        "id": "easy-7",
+        "type": "syntax",
+        "description": "Цикл `while` отказался работать без обязательного обрамления условия.",
+        "code": "let count = 0;\nwhile count < 5 {\n  count++;\n}",
+        "errorLine": 2,
+        "correctAnswer": "while (count < 5) {",
+        "hint": "Условие в цикле while должно оборачиваться в круглые скобки.",
+        "explanation": "В JavaScript условие для цикла `while` обязательно заключается в круглые скобки `()`."
+      },
+      {
+        "id": "easy-8",
+        "type": "syntax",
+        "description": "Имя встроенного метода консоли исказилось из-за опечатки.",
+        "code": "console.lag(\"Game Over\");",
+        "errorLine": 1,
+        "correctAnswer": "console.log(\"Game Over\");",
+        "hint": "Проверь правильность написания названия метода вывода.",
+        "explanation": "Для вывода сообщений в консоль используется метод `console.log()`, а не `console.lag()`."
+      },
+      {
+        "id": "easy-9",
+        "type": "syntax",
+        "description": "Свойства внутри объекта слиплись — между ними исчез разделитель.",
+        "code": "let user = { name: \"Alex\" age: 25 };\nconsole.log(user);",
+        "errorLine": 1,
+        "correctAnswer": "let user = { name: \"Alex\", age: 25 };",
+        "hint": "Свойства внутри объекта разделяются запятой.",
+        "explanation": "В объектах пары «ключ: значение» должны разделяться запятыми."
+      },
+      {
+        "id": "easy-10",
+        "type": "syntax",
+        "description": "Код пытается изменить неизменяемое. Объяви переменную правильно.",
+        "code": "const PI = 3.14;\nPI = 3.14159;",
+        "errorLine": 1,
+        "correctAnswer": "let PI = 3.14;",
+        "hint": "Константу const нельзя менять. Используй let для объявления первой строки.",
+        "explanation": "Переменным, объявленным через `const`, нельзя присваивать новые значения. Для изменяемых переменных используется `let`."
+      },
+      {
+        "id": "easy-11",
+        "type": "syntax",
+        "description": "Элементы массива потеряли связь друг с другом из-за пропущенного знака.",
+        "code": "let fruits = ['apple', 'banana' 'orange'];\nconsole.log(fruits);",
+        "errorLine": 1,
+        "correctAnswer": "let fruits = ['apple', 'banana', 'orange'];",
+        "hint": "Элементы массива разделяются запятыми.",
+        "explanation": "Между элементами массива должна стоять запятая."
+      },
+      {
+        "id": "easy-12",
+        "type": "syntax",
+        "description": "Всплывающее окно `alert` отказалось принимать сообщение без скобок вызова.",
+        "code": "alert \"System Error\";",
+        "errorLine": 1,
+        "correctAnswer": "alert(\"System Error\");",
+        "hint": "Аргументы вызова функции должны быть заключены в круглые скобки.",
+        "explanation": "Вызов встроенных функций требует передачи аргументов внутри круглых скобок `()`."
       }
     ],
     "phases": [
