@@ -7,7 +7,7 @@
       {
         "id": "hard-1",
         "type": "write",
-        "code": "// Напиши функцию factorial(n), которая возвращает факториал числа n\n// Пример: factorial(5) === 120\n\n",
+        "code": "// Напиши функцию factorial(n), которая возвращает факториал числа n\n// Пример: factorial(5) === 120",
         "correctAnswer": "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}",
         "tests": [
           { "input": [5], "expected": 120 },
