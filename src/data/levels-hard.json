@@ -29,6 +29,217 @@
         ],
         "hint": "Приведи строку к нижнему регистру и сравни с перевёрнутой версией",
         "explanation": "Палиндром — строка, которая читается одинаково в обоих направлениях. Можно сравнивать с `reverse()`."
+      },
+      {
+        "id": "hard-3",
+        "type": "write",
+        "code": "// Напиши функцию fibonacci(n), которая возвращает n-е число Фибоначчи\n// Пример: fibonacci(6) === 8 (последовательность: 0, 1, 1, 2, 3, 5, 8...)\n\n",
+        "correctAnswer": "function fibonacci(n) {\n  if (n <= 0) return 0;\n  if (n === 1) return 1;\n  let a = 0, b = 1;\n  for (let i = 2; i <= n; i++) {\n    let temp = a + b;\n    a = b;\n    b = temp;\n  }\n  return b;\n}",
+        "tests": [
+          { "input": [0], "expected": 0 },
+          { "input": [1], "expected": 1 },
+          { "input": [6], "expected": 8 },
+          { "input": [10], "expected": 55 }
+        ],
+        "hint": "Каждое следующее число — это сумма двух предыдущих (начиная с 0 и 1).",
+        "explanation": "Числа Фибоначчи можно вычислить через рекурсию или с помощью цикла за O(n)."
+      },
+      {
+        "id": "hard-4",
+        "type": "write",
+        "code": "// Напиши функцию reverseString(str), которая переворачивает строку\n// Пример: reverseString(\"hello\") === \"olleh\"\n\n",
+        "correctAnswer": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+        "tests": [
+          { "input": ["hello"], "expected": "olleh" },
+          { "input": ["world"], "expected": "dlrow" },
+          { "input": ["a"], "expected": "a" }
+        ],
+        "hint": "Разбей строку на массив символов с помощью split(''), переверни через reverse() и собери с помощью join('').",
+        "explanation": "Комбинация `.split('')`, `.reverse()` и `.join('')` — самый простой способ перевернуть строку в JS."
+      },
+      {
+        "id": "hard-5",
+        "type": "write",
+        "code": "// Напиши функцию removeDuplicates(arr), которая возвращает массив без повторяющихся элементов\n// Пример: removeDuplicates([1, 2, 2, 3, 1]) === [1, 2, 3]\n\n",
+        "correctAnswer": "function removeDuplicates(arr) {\n  return Array.from(new Set(arr));\n}",
+        "tests": [
+          { "input": [[1, 2, 2, 3, 1]], "expected": [1, 2, 3] },
+          { "input": [["a", "b", "a"]], "expected": ["a", "b"] },
+          { "input": [[]], "expected": [] }
+        ],
+        "hint": "Объект Set автоматически хранит только уникальные значения.",
+        "explanation": "Структура данных `Set` хранит уникальные значения. Перевод `new Set(arr)` обратно в массив через `Array.from()` или спред-оператор `[...new Set(arr)]` удаляет все дубликаты."
+      },
+      {
+        "id": "hard-6",
+        "type": "write",
+        "code": "// Напиши функцию findMax(arr), которая возвращает максимальное число в массиве\n// Пример: findMax([3, 7, 2, 9, 1]) === 9\n\n",
+        "correctAnswer": "function findMax(arr) {\n  return Math.max(...arr);\n}",
+        "tests": [
+          { "input": [[3, 7, 2, 9, 1]], "expected": 9 },
+          { "input": [[-5, -2, -10]], "expected": -2 },
+          { "input": [[42]], "expected": 42 }
+        ],
+        "hint": "Используй Math.max и спред-оператор (...) для передачи элементов массива.",
+        "explanation": "`Math.max(...arr)` разворачивает элементы массива в аргументы и возвращает наибольшее из них."
+      },
+      {
+        "id": "hard-7",
+        "type": "write",
+        "code": "// Напиши функцию countVowels(str), которая возвращает количество гласных букв (a, e, i, o, u) в строке без учёта регистра\n// Пример: countVowels(\"Hello World\") === 3\n\n",
+        "correctAnswer": "function countVowels(str) {\n  const matches = str.match(/[aeiou]/gi);\n  return matches ? matches.length : 0;\n}",
+        "tests": [
+          { "input": ["Hello World"], "expected": 3 },
+          { "input": ["xyz"], "expected": 0 },
+          { "input": ["AEIOU"], "expected": 5 }
+        ],
+        "hint": "Можно использовать регулярное выражение /[aeiou]/gi или цикл по строке с проверкой 'aeiou'.includes(char).",
+        "explanation": "Регулярное выражение с флагами `g` (глобальный поиск) и `i` (нечувствительность к регистру) находит все гласные."
+      },
+      {
+        "id": "hard-8",
+        "type": "write",
+        "code": "// Напиши функцию isPrime(n), которая возвращает true, если число n является простым, и false в противном случае\n// Пример: isPrime(7) === true\n\n",
+        "correctAnswer": "function isPrime(n) {\n  if (n <= 1) return false;\n  for (let i = 2; i <= Math.sqrt(n); i++) {\n    if (n % i === 0) return false;\n  }\n  return true;\n}",
+        "tests": [
+          { "input": [7], "expected": true },
+          { "input": [4], "expected": false },
+          { "input": [1], "expected": false },
+          { "input": [2], "expected": true }
+        ],
+        "hint": "Простое число больше 1 и делится только на 1 и на само себя. Проверяй делители до Math.sqrt(n).",
+        "explanation": "Проверка делителей до квадратного корня числа позволяет эффективно узнать, является ли число простым."
+      },
+      {
+        "id": "hard-9",
+        "type": "write",
+        "code": "// Напиши функцию sumArray(arr), которая суммирует все числа в массиве (включая вложенные массивы любой глубины)\n// Пример: sumArray([1, [2, 3], [4, [5]]]) === 15\n\n",
+        "correctAnswer": "function sumArray(arr) {\n  return arr.flat(Infinity).reduce((sum, num) => sum + num, 0);\n}",
+        "tests": [
+          { "input": [[1, [2, 3], [4, [5]]]], "expected": 15 },
+          { "input": [[1, 2, 3]], "expected": 6 },
+          { "input": [[]], "expected": 0 }
+        ],
+        "hint": "Метод arr.flat(Infinity) «раскрывает» все вложенные массивы, после чего можно использовать reduce.",
+        "explanation": "`arr.flat(Infinity)` делает массив плоским, а метод `reduce` складывает все элементы."
+      },
+      {
+        "id": "hard-10",
+        "type": "write",
+        "code": "// Напиши функцию charCount(str), которая возвращает объект с подсчётом каждого символа в строке (без учёта пробелов)\n// Пример: charCount(\"aba\") === { a: 2, b: 1 }\n\n",
+        "correctAnswer": "function charCount(str) {\n  const result = {};\n  for (let char of str.replace(/\\s/g, '')) {\n    result[char] = (result[char] || 0) + 1;\n  }\n  return result;\n}",
+        "tests": [
+          { "input": ["aba"], "expected": { "a": 2, "b": 1 } },
+          { "input": ["a b a"], "expected": { "a": 2, "b": 1 } },
+          { "input": ["hello"], "expected": { "h": 1, "e": 1, "l": 2, "o": 1 } }
+        ],
+        "hint": "Удали пробелы с помощью replace(/\\s/g, ''), а затем пройдись циклом по символам и заполняй объект-счётчик.",
+        "explanation": "Использование объекта как хэш-таблицы (карта частотности) — базовый прием для подсчёта элементов."
+      },
+      {
+        "id": "hard-11",
+        "type": "write",
+        "code": "// Напиши функцию isAnagram(str1, str2), которая проверяет, являются ли две строки анаграммами (состоят из одинаковых букв в разном порядке)\n// Пример: isAnagram(\"listen\", \"silent\") === true\n\n",
+        "correctAnswer": "function isAnagram(str1, str2) {\n  const normalize = str => str.toLowerCase().replace(/[^a-z0-9]/g, '').split('').sort().join('');\n  return normalize(str1) === normalize(str2);\n}",
+        "tests": [
+          { "input": ["listen", "silent"], "expected": true },
+          { "input": ["hello", "world"], "expected": false },
+          { "input": ["Dormitory", "dirty room"], "expected": true }
+        ],
+        "hint": "Приведи обе строки к нижнему регистру, отсортируй их буквы по алфавиту и сравни полученные строки.",
+        "explanation": "Если отсортировать символы двух анаграмм по алфавиту, получатся абсолютно одинаковые строки."
+      },
+      {
+        "id": "hard-12",
+        "type": "write",
+        "code": "// Напиши функцию capitalizeWords(str), которая делает первую букву каждого слова в строке заглавной\n// Пример: capitalizeWords(\"hello world\") === \"Hello World\"\n\n",
+        "correctAnswer": "function capitalizeWords(str) {\n  return str.split(' ').map(word => word ? word[0].toUpperCase() + word.slice(1) : '').join(' ');\n}",
+        "tests": [
+          { "input": ["hello world"], "expected": "Hello World" },
+          { "input": ["javascript code"], "expected": "Javascript Code" },
+          { "input": ["a"], "expected": "A" }
+        ],
+        "hint": "Разбей строку на слова через split(' '), преобразуй первое слово через toUpperCase() + slice(1) и соедини обратно.",
+        "explanation": "Разбиение строки на слова с помощью `split(' ')` позволяет обработать каждое слово отдельно через `.map()`."
+      },
+      {
+        "id": "hard-13",
+        "type": "write",
+        "code": "// Напиши функцию findMissingNumber(arr), которая принимает массив чисел от 1 до N (с одним пропущенным числом) и возвращает пропущенное число\n// Пример: findMissingNumber([1, 2, 4, 5]) === 3\n\n",
+        "correctAnswer": "function findMissingNumber(arr) {\n  const n = arr.length + 1;\n  const expectedSum = (n * (n + 1)) / 2;\n  const actualSum = arr.reduce((a, b) => a + b, 0);\n  return expectedSum - actualSum;\n}",
+        "tests": [
+          { "input": [[1, 2, 4, 5]], "expected": 3 },
+          { "input": [[2, 3, 1, 5]], "expected": 4 },
+          { "input": [[1]], "expected": 2 }
+        ],
+        "hint": "Рассчитай ожидаемую сумму чисел от 1 до N по формуле N * (N + 1) / 2 и вычти из неё фактическую сумму массива.",
+        "explanation": "Формула Гаусса `N * (N + 1) / 2` даёт сумму первых N чисел. Разница с реальной суммой равен пропущенному числу."
+      },
+      {
+        "id": "hard-14",
+        "type": "write",
+        "code": "// Напиши функцию compressString(str), которая сжимает строку, заменяя повторяющиеся символы на символ и их количество\n// Если сжатая строка не короче исходной, верни исходную строку\n// Пример: compressString(\"aabcccccaaa\") === \"a2b1c5a3\"\n\n",
+        "correctAnswer": "function compressString(str) {\n  let compressed = '';\n  let count = 1;\n  for (let i = 0; i < str.length; i++) {\n    if (str[i] === str[i + 1]) {\n      count++;\n    } else {\n      compressed += str[i] + count;\n      count = 1;\n    }\n  }\n  return compressed.length < str.length ? compressed : str;\n}",
+        "tests": [
+          { "input": ["aabcccccaaa"], "expected": "a2b1c5a3" },
+          { "input": ["abcd"], "expected": "abcd" },
+          { "input": ["pure"], "expected": "pure" }
+        ],
+        "hint": "Пройдись циклом по строке, считая одинаковые подряд идущие символы. В конце сравни длины.",
+        "explanation": "Алгоритм простейшего RLE-сжатия (Run-Length Encoding): подсчет последовательных повторов символов."
+      },
+      {
+        "id": "hard-15",
+        "type": "write",
+        "code": "// Напиши функцию chunkArray(arr, size), которая разбивает массив на подмассивы указанного размера size\n// Пример: chunkArray([1, 2, 3, 4, 5], 2) === [[1, 2], [3, 4], [5]]\n\n",
+        "correctAnswer": "function chunkArray(arr, size) {\n  const result = [];\n  for (let i = 0; i < arr.length; i += size) {\n    result.push(arr.slice(i, i + size));\n  }\n  return result;\n}",
+        "tests": [
+          { "input": [[1, 2, 3, 4, 5], 2], "expected": [[1, 2], [3, 4], [5]] },
+          { "input": [[1, 2, 3, 4], 2], "expected": [[1, 2], [3, 4]] },
+          { "input": [[1, 2, 3], 5], "expected": [[1, 2, 3]] }
+        ],
+        "hint": "Используй шаг цикла i += size и метод slice(i, i + size) для вырезания кусочков массива.",
+        "explanation": "Метод `arr.slice(start, end)` вырезает кусок массива, не изменяя исходный. Цикл с шагом `size` формирует фрагменты."
+      },
+      {
+        "id": "hard-16",
+        "type": "write",
+        "code": "// Напиши функцию isPowerOfTwo(n), которая возвращает true, если n является степенью двойки (1, 2, 4, 8, 16...)\n// Пример: isPowerOfTwo(16) === true\n\n",
+        "correctAnswer": "function isPowerOfTwo(n) {\n  if (n <= 0) return false;\n  return (n & (n - 1)) === 0;\n}",
+        "tests": [
+          { "input": [16], "expected": true },
+          { "input": [1], "expected": true },
+          { "input": [18], "expected": false },
+          { "input": [0], "expected": false }
+        ],
+        "hint": "Побитовая операция (n & (n - 1)) === 0 проверяет, имеет ли число только один установленный бит в двоичной системе.",
+        "explanation": "У степеней двойки в двоичном виде ровно одна единица (например, 8 = 1000). Выражение `(n & (n - 1))` сбрасывает эту единицу."
+      },
+      {
+        "id": "hard-17",
+        "type": "write",
+        "code": "// Напиши функцию twoSum(nums, target), которая возвращает индексы двух чисел, сумма которых равна target\n// Пример: twoSum([2, 7, 11, 15], 9) === [0, 1]\n\n",
+        "correctAnswer": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) {\n      return [map.get(diff), i];\n    }\n    map.set(nums[i], i);\n  }\n  return [];\n}",
+        "tests": [
+          { "input": [[2, 7, 11, 15], 9], "expected": [0, 1] },
+          { "input": [[3, 2, 4], 6], "expected": [1, 2] },
+          { "input": [[3, 3], 6], "expected": [0, 1] }
+        ],
+        "hint": "Сохраняй просмотренные числа и их индексы в хэш-таблице (Map) и ищи разницу diff = target - num.",
+        "explanation": "Использование `Map` позволяет найти пару чисел за линейное время O(n) вместо вложенного цикла O(n²)."
+      },
+      {
+        "id": "hard-18",
+        "type": "write",
+        "code": "// Напиши функцию mergeIntervals(intervals), которая объединяет перекрывающиеся интервалы\n// Пример: mergeIntervals([[1, 3], [2, 6], [8, 10]]) === [[1, 6], [8, 10]]\n\n",
+        "correctAnswer": "function mergeIntervals(intervals) {\n  if (!intervals.length) return [];\n  intervals.sort((a, b) => a[0] - b[0]);\n  const result = [intervals[0]];\n  for (let i = 1; i < intervals.length; i++) {\n    const last = result[result.length - 1];\n    const current = intervals[i];\n    if (current[0] <= last[1]) {\n      last[1] = Math.max(last[1], current[1]);\n    } else {\n      result.push(current);\n    }\n  }\n  return result;\n}",
+        "tests": [
+          { "input": [[[1, 3], [2, 6], [8, 10]]], "expected": [[1, 6], [8, 10]] },
+          { "input": [[[1, 4], [4, 5]]], "expected": [[1, 5]] },
+          { "input": [[[1, 2], [3, 4]]], "expected": [[1, 2], [3, 4]] }
+        ],
+        "hint": "Сначала отсортируй интервалы по начальной точке, а затем объединяй с последним интервалом в результате, если они пересекаются.",
+        "explanation": "Классическая задача на интервалы: сортировка по началу делает возможным объединение за один проход."
       }
     ],
     "phases": [
