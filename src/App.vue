@@ -1,11 +1,20 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="stage">
+    <div class="stage__screen">
+      <RouterView v-slot="{ Component, route }">
+        <Transition name="screen-fade" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </RouterView>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<script>
+import { RouterView } from 'vue-router'
+
+export default {
+  name: 'App',
+  components: { RouterView },
+}
+</script>

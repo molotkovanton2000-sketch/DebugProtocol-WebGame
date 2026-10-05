@@ -7,20 +7,142 @@
       {
         "id": "medium-1",
         "type": "logic",
-        "code": "function checkAge(age) {\n  if (age >= 18 {\n    return \"Доступ разрешён\";\n  }\n  return \"Доступ запрещён\";\n}",
+        "description": "Страж пропускает детей и задерживает взрослых. Восстанови истинный порядок проверки.",
+        "code": "function checkAge(age) {\n  if (age < 18) {\n    return \"Доступ разрешён\";\n  }\n  return \"Доступ запрещён\";\n}",
         "errorLine": 2,
         "correctAnswer": "  if (age >= 18) {",
-        "hint": "Проверь синтаксис условного оператора",
-        "explanation": "В JavaScript условие в `if` обязательно заключается в круглые скобки."
+        "hint": "Проверь знак сравнения: кому должен быть разрешён доступ?",
+        "explanation": "Логическая ошибка: знак `<` разрешал доступ несовершеннолетним. Для проверки возраста 18+ нужен оператор `>=`."
       },
       {
         "id": "medium-2",
         "type": "logic",
-        "code": "function sum(a, b) {\n  let result = a + b;\n}\n\nconsole.log(sum(2, 3)); // undefined",
+        "description": "Функция производит вычисления, но результат бесследно исчезает в пустоте.",
+        "code": "function sum(a, b) {\n  let result = a + b;\n}\n\nconsole.log(sum(2, 3));",
         "errorLine": 3,
         "correctAnswer": "  return result;",
         "hint": "Функция должна возвращать результат",
         "explanation": "Без `return` функция возвращает `undefined`. Нужно вернуть `result`."
+      },
+      {
+        "id": "medium-3",
+        "type": "logic",
+        "description": "Время застыло: этот алгоритм застрял во временной петле и никогда не завершится.",
+        "code": "function countDown() {\n  let i = 5;\n  while (i > 0) {\n    console.log(i);\n  }\n}",
+        "errorLine": 4,
+        "correctAnswer": "    i--;",
+        "hint": "Значение `i` никогда не меняется внутри цикла, что приводит к зацикливанию.",
+        "explanation": "Бесконечный цикл: необходимо уменьшать переменную `i` на каждой итерации (`i--`)."
+      },
+      {
+        "id": "medium-4",
+        "type": "logic",
+        "description": "Программа попыталась изменить данные прямо во время проверки. Заставь её сравнивать, а не присваивать.",
+        "code": "function isEven(num) {\n  if (num % 2 = 0) {\n    return true;\n  }\n  return false;\n}",
+        "errorLine": 2,
+        "correctAnswer": "  if (num % 2 === 0) {",
+        "hint": "Одиночный знак `=` выполняет присваивание, а не сравнение.",
+        "explanation": "Для сравнения значений нужно использовать оператор строгого равенства `===` вместо присваивания `=`."
+      },
+      {
+        "id": "medium-5",
+        "type": "logic",
+        "description": "Торговый бот сошёл с ума: вместо уменьшения цены скидка делает её только дороже.",
+        "code": "function calculateTotal(price, discount) {\n  return price + discount;\n}",
+        "errorLine": 2,
+        "correctAnswer": "  return price - discount;",
+        "hint": "Скидка должна уменьшать итоговую стоимость, а не увеличивать ее.",
+        "explanation": "Математическая ошибка: при расчете итоговой цены с учетом скидки нужно использовать вычитание."
+      },
+      {
+        "id": "medium-6",
+        "type": "logic",
+        "description": "Указатель попытался дотянуться до несуществующего края массива и вернул пустоту.",
+        "code": "function getLastElement(arr) {\n  return arr[arr.length];\n}",
+        "errorLine": 2,
+        "correctAnswer": "  return arr[arr.length - 1];",
+        "hint": "Индексация массивов начинается с 0, поэтому индекс последнего элемента отличается от длины.",
+        "explanation": "Длина массива на 1 больше индекса последнего элемента. `arr[arr.length]` вернет `undefined`."
+      },
+      {
+        "id": "medium-7",
+        "type": "logic",
+        "description": "Система безопасности стала слишком суровой и требует то, что не задумывалось разработчиком.",
+        "code": "function canAccess(isAdmin, hasKey) {\n  if (isAdmin && hasKey) {\n    return \"Доступ разрешён\";\n  }\n  return \"Доступ запрещён\";\n}",
+        "errorLine": 2,
+        "correctAnswer": "  if (isAdmin || hasKey) {",
+        "hint": "По условию достаточно быть администратором ИЛИ иметь ключ.",
+        "explanation": "Оператор `&&` требует выполнения обоих условий одновременно. Для условия «хотя бы одно из двух» используется `||`."
+      },
+      {
+        "id": "medium-8",
+        "type": "logic",
+        "description": "Цикл шагнул на один шаг дальше, чем забор массива, и испортил итоговые данные.",
+        "code": "function doubleArray(numbers) {\n  for (let i = 0; i <= numbers.length; i++) {\n    numbers[i] *= 2;\n  }\n  return numbers;\n}",
+        "errorLine": 2,
+        "correctAnswer": "  for (let i = 0; i < numbers.length; i++) {",
+        "hint": "Проверь условие окончания цикла: с какого и до какого индекса существуют элементы?",
+        "explanation": "Условие `i <= numbers.length` вызовет лишнюю итерацию с несуществующим индексом, результатом которой станет `NaN`."
+      },
+      {
+        "id": "medium-9",
+        "type": "logic",
+        "description": "Первый элемент коллекции стал невидимкой для проверки. Исправь иллюзию типов.",
+        "code": "function hasApple(fruits) {\n  if (fruits.indexOf(\"apple\")) {\n    return \"Найдено\";\n  }\n  return \"Не найдено\";\n}",
+        "errorLine": 2,
+        "correctAnswer": "  if (fruits.indexOf(\"apple\") !== -1) {",
+        "hint": "Метод indexOf возвращает 0, если элемент первый, а 0 приводится к false.",
+        "explanation": "Если элемент стоит на нулевой позиции, `indexOf` вернет `0` (falsy), и `if` не выполнится. Нужно проверять `!== -1`."
+      },
+      {
+        "id": "medium-10",
+        "type": "logic",
+        "description": "Поисковый алгоритм сдаётся и опускает руки после первого же неподходящего элемента.",
+        "code": "function findPositive(numbers) {\n  for (let i = 0; i < numbers.length; i++) {\n    if (numbers[i] > 0) {\n      return numbers[i];\n    }\n    return null;\n  }\n}",
+        "errorLine": 6,
+        "correctAnswer": "  }\n  return null;",
+        "hint": "Вернётся ли цикл к проверке следующих элементов, если return вызовется на первой итерации?",
+        "explanation": "Инструкция `return null` находилась внутри цикла, из-за чего проверка прерывалась на самом первом элементе."
+      },
+      {
+        "id": "medium-11",
+        "type": "logic",
+        "description": "Массив сортируется по законам алфавита, а не чисел. Приведи математику в порядок.",
+        "code": "function sortNumbers(arr) {\n  return arr.sort();\n}",
+        "errorLine": 2,
+        "correctAnswer": "  return arr.sort((a, b) => a - b);",
+        "hint": "По умолчанию sort() сортирует элементы как строки ('10' окажется раньше '2').",
+        "explanation": "Метод `sort()` без аргументов преобразует элементы в строки. Для правильной числовой сортировки нужна функция сравнения `(a, b) => a - b`."
+      },
+      {
+        "id": "medium-12",
+        "type": "logic",
+        "description": "Отрицание поглотило только первое значение, исказив смысл всей логической скобки.",
+        "code": "function isNotInRange(val) {\n  if (!val >= 10 && val <= 20) {\n    return true;\n  }\n  return false;\n}",
+        "errorLine": 2,
+        "correctAnswer": "  if (!(val >= 10 && val <= 20)) {",
+        "hint": "Оператор ! имеет более высокий приоритет и применится только к val, а не ко всему выражению.",
+        "explanation": "Логическое отрицание `!` без обертывания в скобки применяется только к переменной `val`, преобразуя ее в boolean."
+      },
+      {
+        "id": "medium-13",
+        "type": "logic",
+        "description": "Математический хаос: деление забрало себе только часть формулы вместо всей суммы.",
+        "code": "function getAverage(a, b, c) {\n  return a + b + c / 3;\n}",
+        "errorLine": 2,
+        "correctAnswer": "  return (a + b + c) / 3;",
+        "hint": "Вспомни приоритет математических операций: деление выполняется раньше сложения.",
+        "explanation": "Без скобок на 3 делится только переменная `c`. Для получения среднего арифметического нужно обернуть сумму `(a + b + c)` в скобки."
+      },
+      {
+        "id": "medium-14",
+        "type": "logic",
+        "description": "Функция обработала данные, но по ошибке отдаёт сырой исходник.",
+        "code": "function formatUser(name) {\n  let userName = name;\n  if (!userName) {\n    userName = \"Аноним\";\n  }\n  return name;\n}",
+        "errorLine": 6,
+        "correctAnswer": "  return userName;",
+        "hint": "Какая переменная содержит измененное дефолтное значение?",
+        "explanation": "Функция возвращала исходный параметр `name` вместо обновленной переменной `userName`."
       }
     ],
     "phases": [
