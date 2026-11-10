@@ -2,7 +2,7 @@
   <div class="menu-screen" :class="`menu-screen--${lightning}`">
     <LightningFrame v-if="lightning !== 'none'" :variant="lightning" />
 
-    <BossAvatar class="menu-screen__boss" :size="960" :mood="bossMood" />
+    <BossAvatar class="menu-screen__boss" :mood="bossMood" />
 
     <AppHeader :back="back" :back-to="backTo" />
 
@@ -52,8 +52,10 @@ export default {
 
 .menu-screen .menu-screen__boss {
   position: absolute;
-  left: calc(var(--px) * 830);
-  top: calc(var(--px) * 225);
+  /* голова на уровне меню, низ тела растворяется у нижнего края */
+  --boss-scale: 11;
+  left: calc(var(--px) * 1020);
+  top: calc(var(--px) * 160);
 }
 
 .menu-screen__content {
@@ -84,11 +86,12 @@ export default {
 /* ---------- Портрет (телефон): всё в одну колонку ---------- */
 @media (orientation: portrait) {
   .menu-screen .menu-screen__boss {
+    /* телефон: босс между меню и масками, низ растворяется над масками */
+    --boss-scale: 8;
     left: 50%;
     top: auto;
-    bottom: calc(var(--px) * -120);
+    bottom: calc(var(--px) * 300);
     transform: translateX(-50%);
-    opacity: 0.55;
   }
 
   .menu-screen__content {

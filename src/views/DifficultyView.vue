@@ -6,6 +6,7 @@
       :gap="56"
       aria-label="Выбор сложности"
       @hover="onHover"
+      @leave="hovered = null"
       @select="onSelect"
     />
 
@@ -53,7 +54,7 @@ export default {
       router.push(route.query.next === 'game' ? '/game' : '/')
     }
 
-    return { items, litStars, previewLightning, onHover, onSelect }
+    return { items, hovered, litStars, previewLightning, onHover, onSelect }
   },
 }
 </script>

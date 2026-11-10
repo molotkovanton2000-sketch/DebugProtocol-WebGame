@@ -7,7 +7,7 @@
     </template>
 
     <template #overlay>
-      <AppFooter>© {{ year }} Debug Protocol · тимлид, Андрей, Артём, Лёха</AppFooter>
+      <AppFooter>© {{ year }} Debug Protocol · авторы: {{ authors }}</AppFooter>
     </template>
   </MenuScreen>
 </template>
@@ -30,7 +30,11 @@ export default {
   name: 'AboutView',
   components: { MenuScreen, AppNavigation, AppFooter, StarRow },
   setup() {
-    return { links: LINKS, year: new Date().getFullYear() }
+    return {
+      links: LINKS,
+      authors: 'Коняхин А. В., Наташкин А. А., Молотков А. Д., Григоркин А. Д.',
+      year: new Date().getFullYear(),
+    }
   },
 }
 </script>
