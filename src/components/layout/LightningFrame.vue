@@ -98,6 +98,10 @@ export default {
   height: auto;
   transform-origin: center;
   animation: flicker 4s steps(1, end) infinite;
+  /* текстура квадратная и ветки обрезаны её краями — гасим края,
+     чтобы посреди экрана не было видно ровных срезов */
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
 }
 
 .lightning-frame--hard .lightning-frame__bolt {
