@@ -82,6 +82,7 @@ export default {
   color: var(--color-violet-light);
   opacity: 0;
   pointer-events: none;
+  /* смешивание «screen»: копия лишь подсвечивает текст, а не перекрывает его */
   mix-blend-mode: screen;
 }
 
@@ -98,28 +99,19 @@ export default {
   padding: calc(var(--px) * 10) calc(var(--px) * 6);
 }
 
-.app-button--menu::before {
-  content: '>';
-  position: absolute;
-  left: calc(var(--px) * -82);
-  color: var(--color-violet-light);
+/* Подсветка пункта меню управляется только классом active (наведение/фокус ставит его
+   AppNavigation и снимает при уходе) — так на тач-экранах ничего не залипает от :hover */
+.app-button--menu:hover:not(.app-button--active) .app-button__glitch {
   opacity: 0;
-  animation: blink 0.9s steps(1) infinite;
+  animation: none;
 }
 
-.app-button--menu:hover,
 .app-button--menu:focus-visible,
 .app-button--menu.app-button--active {
   color: #f1e3ff;
   text-shadow:
     calc(var(--px) * 5) 0 0 var(--color-violet),
     calc(var(--px) * -3) 0 0 rgba(0, 220, 255, 0.35);
-}
-
-.app-button--menu:hover::before,
-.app-button--menu:focus-visible::before,
-.app-button--menu.app-button--active::before {
-  opacity: 1;
 }
 
 /* ---------- primary: кнопка в рамке ---------- */
@@ -155,16 +147,18 @@ export default {
 }
 
 .app-button--ghost {
-  border-color: transparent;
-  background: transparent;
+  /* сплошной чёрный фон и рамка — кнопку видно даже поверх молний */
+  border-color: rgba(161, 0, 255, 0.6);
+  background: #000;
   box-shadow: none;
-  color: var(--color-text-muted);
+  color: #e6e6ee;
 }
 
 .app-button--ghost:hover,
 .app-button--ghost:focus-visible {
   color: var(--color-text);
-  border-color: var(--color-violet);
+  border-color: var(--color-neon);
+  box-shadow: 0 0 calc(var(--px) * 14) var(--color-neon-glow);
 }
 
 .app-button--disabled {

@@ -3,7 +3,7 @@
     <AppNavigation :items="items" aria-label="Главное меню" @select="onSelect" />
 
     <template #bottom>
-      <MaskRow :count="3" :broken="difficulty ? 0 : 3" />
+      <MaskRow :states="maskStates" :restore-index="restoreIndex" />
     </template>
   </MenuScreen>
 </template>
@@ -15,12 +15,12 @@ import { storeToRefs } from 'pinia'
 import MenuScreen from '../components/layout/MenuScreen.vue'
 import AppNavigation from '../components/layout/AppNavigation.vue'
 import MaskRow from '../components/common/MaskRow.vue'
-import { useSettingsStore } from '../stores/settings'
+import { DIFFICULTY_ORDER, useSettingsStore } from '../stores/settings'
 
 /**
- * Главное меню. 4 состояния:
- *  - сложность не выбрана → сломанные маски + молнии по углам;
- *  - easy / medium / hard → целые маски, молний тем больше, чем сложнее.
+ * Главное меню. Молнии зависят от выбранной сложности (по умолчанию — по углам).
+ * Три маски — по одной на сложность: целой становится только после победы
+ * над вирусом этой сложности (с анимацией «маска соединяется»).
  */
 export default {
   name: 'HomeView',
@@ -28,9 +28,13 @@ export default {
   setup() {
     const router = useRouter()
     const settings = useSettingsStore()
-    const { difficulty, difficultyConfig } = storeToRefs(settings)
+    const { difficulty, difficultyConfig, cleared } = storeToRefs(settings)
 
     const lightning = computed(() => (difficultyConfig.value ? difficultyConfig.value.lightning : 'corners'))
+
+    const maskStates = computed(() => DIFFICULTY_ORDER.map((id) => (cleared.value[id] ? 'whole' : 'broken')))
+    // индекс маски, которая только что починена (-1 — анимации нет)
+    const restoreIndex = settings.consumePendingRestore()
 
     const items = [
       { id: 'play', label: 'играть' },
@@ -46,7 +50,7 @@ export default {
       else router.push({ path: '/difficulty', query: { next: 'game' } })
     }
 
-    return { items, lightning, difficulty, onSelect }
+    return { items, lightning, difficulty, maskStates, restoreIndex, onSelect }
   },
 }
 </script>

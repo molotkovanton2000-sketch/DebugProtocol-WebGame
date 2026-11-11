@@ -23,9 +23,9 @@ export default {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: calc(var(--px) * 12);
-  font-size: calc(var(--px) * 17);
-  line-height: 1.7;
+  gap: calc(var(--px) * 8);
+  font-size: calc(var(--px) * 15);
+  line-height: 1.6;
   scrollbar-width: thin;
   scrollbar-color: var(--color-neon) transparent;
 }

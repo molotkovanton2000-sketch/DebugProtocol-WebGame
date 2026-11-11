@@ -5,6 +5,15 @@ import { useValidation } from './useValidation'
 const PLAYER_MAX_HP = 100
 const MASKS = 3
 
+/** «1 ошибка», «2 ошибки», «5 ошибок» */
+const plural = (n, one, few, many) => {
+  const m10 = n % 10
+  const m100 = n % 100
+  if (m10 === 1 && m100 !== 11) return one
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few
+  return many
+}
+
 const pick = (arr) => (Array.isArray(arr) && arr.length ? arr[Math.floor(Math.random() * arr.length)] : '')
 
 /**
@@ -39,6 +48,8 @@ export function useGame(difficulty = 'easy') {
 
   const phase = computed(() => phases[boss.phaseIndex] || phases[0] || {})
   const currentTask = computed(() => tasks[taskIndex.value] || null)
+  // Сколько ошибок осталось до захвата: HP игрока / урон по игроку в текущей фазе
+  const mistakesLeft = computed(() => Math.ceil(player.hp / (phase.value.damageToPlayer || 10)))
   const brokenMasks = computed(() => MASKS - Math.ceil((player.hp / player.maxHp) * MASKS))
 
   const say = (event) => {
@@ -64,7 +75,7 @@ export function useGame(difficulty = 'easy') {
   const finish = (result) => {
     status.value = result
     boss.mood = result === 'won' ? 'defeated' : 'attack'
-    if (result === 'won') say('onDefeat')
+    say(result === 'won' ? 'onDefeat' : 'onPlayerDefeat')
   }
 
   const submit = (answer) => {
@@ -105,7 +116,19 @@ export function useGame(difficulty = 'easy') {
     stats.mistakes++
     addLog('error', `- ошибка. вирус бьёт на ${damage}`)
     setMood('attack', 500)
-    say('start')
+
+    if (player.hp > 0) {
+      const n = mistakesLeft.value
+      const word = plural(n, 'ошибка', 'ошибки', 'ошибок')
+      speech.value =
+        n === 1
+          ? pick(['последняя ошибка — и твой комп станет моим!', 'одна ошибка — и я захвачу твой комп!'])
+          : pick([
+              `у тебя осталось всего ${n} ${word}, и я полностью захвачу твой комп!`,
+              `ещё ${n} ${word} — и твой комп мой!`,
+              `осталось ${n} ${word}. потом я захвачу твой комп!`,
+            ])
+    }
 
     if (player.hp <= 0) {
       finish('lost')
@@ -134,6 +157,7 @@ export function useGame(difficulty = 'easy') {
     taskIndex,
     currentTask,
     brokenMasks,
+    mistakesLeft,
     masks: MASKS,
     status,
     speech,
